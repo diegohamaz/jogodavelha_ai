@@ -1,0 +1,59 @@
+#board
+{
+	text-align: center;
+}
+#msg
+{
+	text-align: center;
+	margin-top: 20pt;
+	font-weight: bold;
+	font-size: x-large;
+}
+.A1
+{
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+}
+.A2
+{
+	border-top: 2px solid black;
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+}
+.A3
+{
+	border-top: 2px solid black;
+	border-right: 2px solid black;
+}
+.B1
+{
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+}
+.B2
+{
+	border: 2px solid black;
+}
+.B3
+{
+	border-left: 2px solid black;
+	border-top: 2px solid black;
+	border-right: 2px solid black;
+}
+.C1
+{
+	border-left: 2px solid black;
+	border-bottom: 2px solid black;
+}
+.C2
+{
+	border-left: 2px solid black;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+.C3
+{
+	border-left: 2px solid black;
+	border-top: 2px solid black;
+}

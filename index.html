@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Bootstrap -->
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    
+	    <meta name="Jogo da Velha com AI" content="">
+	    <meta name="Diego Lisboa Giglioli" content="">
+	    <link rel="icon" href="favicon.png">
+	    
+	    <link href="./css/tictactoe.css" rel="stylesheet">
+    	<link href="./bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    	
+    	<title>Jogo da Velha</title>
+	</head>
+	<body>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		
+		<div class="container">
+			<h2>Jogo da Velha Teste L5</h2>
+			<!-- Tabuleiro -->
+			<div class="col-sm-8">
+				<table id="board">
+					<tbody></tbody>
+				</table>
+				<div id="msg"></div>
+			</div>
+			
+			<!-- Opcoes -->
+			<div class="col-sm-4">
+				<div class="col-xs-6">
+					<h5>Jogador 1: <b>X</b></h5>
+					<form>
+						<div class="radio">
+							<label><input type="radio" name="player1" value="human" checked>Humano</label>
+							<label><input type="radio" name="player1" value="AI1">Computador Easy</label>
+							<label><input type="radio" name="player1" value="AI2">Computador Hard</label>
+							<label><input type="radio" name="player1" value="AI3">Computador Expert</label>
+						</div>
+					</form>
+				</div>
+				<div class="col-xs-6">
+					<h5>Jogador 2: <b>O</b></h5>
+					<form>
+						<div class="radio">
+							<label><input type="radio" name="player2" value="human" checked>Humano</label>
+							<label><input type="radio" name="player2" value="AI1">Computador Easy</label>
+							<label><input type="radio" name="player2" value="AI2">Computador Hard</label>
+							<label><input type="radio" name="player2" value="AI3">Computador Expert</label>
+						</div>
+					</form>
+				</div>
+
+				<div class="form-group">
+      				<label for="sel1">Tamanho tabuleiro:</label>
+      				<select class="form-control" name="size" id="boardSizeSelection">
+        				<option value="3" selected>3</option>
+        				<option value="4">4</option>
+				        <option value="5">5</option>
+      				</select>
+      				<br>
+      			</div>
+				
+				<button type="button" class="btn btn-primary" id="initGame">Começar o jogo</button>
+			</div>
+		</div>
+			    
+
+		<script src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script src="./js/helper.js"></script>
+		<script src="./js/jogovelha.js"></script>
+		<script src="./js/main.js"></script>
+	</body>
+</html>

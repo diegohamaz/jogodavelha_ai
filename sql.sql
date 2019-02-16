@@ -1,0 +1,1 @@
+CREATE TABLE `graphql`.`logs_jogo` ( `id` INT(10) NOT NULL AUTO_INCREMENT , `log` TEXT NULL , `data_atualizacao` DATETIME NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
