@@ -3,74 +3,60 @@
  * Contem funções do jogo da velha.
  */
 
-// Global variable for board state
 var board = [];
 var n;
-var blanks; // Number of blank tiles.
-
-// Global variable for DOM elements that point to board.
+var blanks; 
 var boardref = [];
-
-// Global variable for current player (1 = X; -1 = O; false = not playing).
 var currentPlayer = false;
-
-// Global variable to determine human or AI players
 var players = {};
-
-// Global variable for message element
 var message = document.getElementById("msg");
 
-/**
- * Initialises board.
- * Input: size = size of board. Default = 3.
- */
+
 function init(size = 3)
 {
-	// Initialise board
 	n = size;
 	blanks = n*n;
-	let tbl = document.getElementById("board").children[0]; // get <tbody> tag
-	tbl.innerHTML = ""; // remove old board
+	let tbl = document.getElementById("board").children[0]; 
+	tbl.innerHTML = ""; 
 	message.innerHTML = "";
 	let newRow = [];
 	
 	for (let i = 0; i < size; i++) {
 		board[i] = [];
 		boardref[i] = [];
-		
-		// Create new board row
+
 		newRow = tbl.insertBefore(document.createElement("tr"), null);
 		
-		// Create table columns
+
 		for (let j = 0; j < size; j++) 
 		{
-			// board array
+	
 			board[i][j] = 0;
 			
-			// board html elements
+
 			boardref[i][j] = newRow.insertBefore(document.createElement("td"), null);
 			
-			// add class according to board position
+
 			if (i == 0) {
 				if (j == 0) {
-					boardref[i][j].classList.add("A1"); // top left corner
+					boardref[i][j].classList.add("A1");
 				}
 				else if (j == (size - 1)) {
-					boardref[i][j].classList.add("C1"); // top right corner
+					boardref[i][j].classList.add("C1"); 
 				}
 				else {
-					boardref[i][j].classList.add("B1"); // top edge
+					boardref[i][j].classList.add("B1");
 				}
 			}
 			else if (i == (size - 1)) {
 				if (j == 0) {
-					boardref[i][j].classList.add("A3"); // bottom left corner
+					boardref[i][j].classList.add("A3"); 
 				}
 				else if (j == (size - 1)) {
-					boardref[i][j].classList.add("C3"); // bottom right corner
+					boardref[i][j].classList.add("C3"); 
 				}
 				else {
-					boardref[i][j].classList.add("B3"); // bottom edge
+					boardref[i][j].classList.add("B3");
 				}
 			}
 			else {
@@ -92,10 +78,7 @@ function init(size = 3)
 function draw() {
 	for (let i = 0; i < n; i++) {
 		for (let j = 0; j < n; j++) {
-			// remove existing image, if any
 			boardref[i][j].innerHTML = "";
-			
-			// Create new image
 			let type;
 			switch (board[i][j]) {
 				case 1:
@@ -108,9 +91,8 @@ function draw() {
 					type = "blank";
 					break;
 			}
-			img = boardref[i][j].insertBefore(createImg(type), null);
-			
-			// Create onclick event, if playing.
+			img = boardref[i][j].insertBefore(createImg(type), null);			
+
 			if ((currentPlayer !== false) && (type === "blank")) {
 				img.onclick = function () {
 					nextTurn(i.toString() + j.toString());
@@ -155,7 +137,7 @@ function win()
 			winner = 0; 
 		}
 		else {
-			winner = false; // continue jogando
+			winner = false; 
 		}
 	}
 	
@@ -207,7 +189,7 @@ function nextTurn(playerMove, AImove = false)
 	if (winningState !== false) 
 	{
 		executeLog("Fim de jogo "+ winningState);
-		endGame(winningState); // End game
+		endGame(winningState); 
 	}
 	
 	else {
@@ -215,22 +197,15 @@ function nextTurn(playerMove, AImove = false)
 		message.innerHTML = "Jogador ";
 		message.innerHTML += (currentPlayer == -1 ? "2 " : "1 ") + "sua vez.";
 		if (isAITurn()) {
-			executeAJAX('./AI.php?' + inputStringAI(), nextTurn);
+			executeAJAX('./jogoAi.php?' + inputStringAI(), nextTurn);
 		}
 	}
 }
 
-/**
- * Ends game.
- * 
- * @param winningStates
- */
+
 function endGame(winningState) {
 
 	currentPlayer = false;
-	
-	// Display winner
-	console.log(winningState);
 	switch (winningState) {
 		case 1:
 			message.innerHTML = "<font color=\"red\">X</font> ganhou!";
@@ -240,15 +215,14 @@ function endGame(winningState) {
 			break;
 		case 0:
 			message.innerHTML = "<font color=\"black\">Empate Técnico!</font>"
-	}
-	
-	// Re-enable form and start button
+	}	
+
 	toggleForms();
 }
 
 function startGame() 
 {
-	// disable start button and forms
+
 	toggleForms();	
 
 	players = {
@@ -269,28 +243,26 @@ function startGame()
 	executeLog(log);
 
 	if (isAITurn()) {
-		executeAJAX('./AI.php?' + inputStringAI(), nextTurn);		
+		executeAJAX('./jogoAi.php?' + inputStringAI(), nextTurn);		
 	}
 		
 }
 
 function toggleForms() {
-	// Start button
-	let button = document.getElementById("startButton");
-	button.disabled = !button.disabled;
-	
-	// Radio buttons
+
+	let button = document.getElementById("initGame");
+	button.disabled = !button.disabled;	
+
 	for (let input of document.getElementsByTagName("input")) {
 		input.disabled = !input.disabled;
-	}
-	
-	// Board size selection
+	}	
+
 	let input = document.getElementById("boardSizeSelection");
 	input.disabled = !input.disabled;
 }
 
 function createImg(type) {
-	// Create image
+
 	var img = document.createElement("img");
 	img.src = "./img/" + type + ".png";
 	img.height = 128;
@@ -324,13 +296,10 @@ function isAITurn()
 
 
 function inputStringAI() {
-	// n
 	var str = "n=" + n.toString() + "&";
 	
-	// currentPlayer
 	str += "currentPlayer=" + (currentPlayer == -1 ? "2&" : "1&");
 	
-	// board
 	str += "board=";
 	for (let i = 0; i < n; i++) {
 		for (let j = 0; j < n; j++) {
@@ -345,10 +314,7 @@ function inputStringAI() {
 	}
 
 	str = str.slice(0, -1);
-	
-	// AI
 	str += "&AI=" + (currentPlayer == 1 ? players.p1 : players.p2);
-
 	return str;
 }
 
